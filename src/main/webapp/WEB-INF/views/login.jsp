@@ -22,9 +22,9 @@
 <section class="login-page" id="login">
     <h2>Zaloguj się</h2>
     <p class="newAccMsg">${newAccount}</p>
-    <form method="post">
+    <form method="post" action="/login">
         <div class="form-group">
-            <input type="email" name="email" value="${fn:escapeXml(email)}" placeholder="Email"/>
+            <input type="email" name="username" value="${fn:escapeXml(email)}" placeholder="Email"/>
         </div>
         <div class="form-group">
             <input type="password" name="password" placeholder="Hasło"/>

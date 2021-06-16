@@ -14,7 +14,7 @@ public class CachedAuthFailHandler implements AuthenticationFailureHandler {
                                         HttpServletResponse response,
                                         AuthenticationException e) throws IOException, ServletException {
 
-        request.setAttribute("email", request.getParameter("email"));
+        request.setAttribute("email", request.getParameter("username"));
         request.setAttribute("errMsg", "Email lub hasło nieprawidłowe");
         request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
     }

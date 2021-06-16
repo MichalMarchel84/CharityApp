@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -12,12 +12,12 @@
     <title>Oddam w dobre ręce</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
+<%@include file="header.jsp" %>
 
 <section class="stats">
     <div class="container container--85">
         <div class="stats--item">
-            <em>13</em>
+            <em>${bags}</em>
 
             <h3>Oddanych worków</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius est beatae, quod accusamus illum
@@ -25,7 +25,7 @@
         </div>
 
         <div class="stats--item">
-            <em>5</em>
+            <em>${donations}</em>
             <h3>Przekazanych darów</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam magnam, sint nihil cupiditate quas
                 quam.</p>
@@ -60,7 +60,13 @@
         </div>
     </div>
 
-    <a href="/register" class="btn btn--large">Załóż konto</a>
+    <sec:authorize access="!isAuthenticated()">
+        <a href="/register" class="btn btn--large">Załóż konto</a>
+        <a href="/donate" class="btn btn--large">Przekaż bez konta</a>
+    </sec:authorize>
+    <sec:authorize access="isAuthenticated()">
+        <a href="/donate" class="btn btn--large">Przekaż rzeczy</a>
+    </sec:authorize>
 </section>
 
 <section class="about-us">
@@ -112,7 +118,7 @@
 
 </section>
 
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp" %>
 
 </body>
 </html>

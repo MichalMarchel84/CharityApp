@@ -8,8 +8,8 @@ import javax.validation.constraints.Pattern;
 
 @Data
 @Entity
-@Table(name = "user_addresses")
-public class UserAddress {
+@Table(name = "addresses")
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

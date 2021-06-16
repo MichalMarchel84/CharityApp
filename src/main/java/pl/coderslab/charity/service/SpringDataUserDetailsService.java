@@ -1,5 +1,6 @@
 package pl.coderslab.charity.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +12,7 @@ import pl.coderslab.charity.model.User;
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 public class SpringDataUserDetailsService implements UserDetailsService {
 
     private UserService userService;

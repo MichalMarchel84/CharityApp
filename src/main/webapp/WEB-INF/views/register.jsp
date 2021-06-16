@@ -30,13 +30,15 @@
         </div>
 
         <div class="form-group">
-            <form:password path="password" placeholder="Hasło" />
+            <form:password path="password" placeholder="Hasło" /><br/>
+            <form:errors path="password" cssClass="errMsg"/>
         </div>
-        <form:errors path="password" cssClass="errMsg"/>
+
         <div class="form-group">
-            <input type="password" name="repeat" placeholder="Powtórz hasło" />
+            <input type="password" name="repeat" placeholder="Powtórz hasło" /><br/>
+            <span class="errMsg">${repeatError}</span>
         </div>
-        <span class="errMsg">${repeatError}</span>
+
         <div class="form-group form-group--buttons">
             <a href="/login" class="btn btn--without-border">Zaloguj się</a>
             <button class="btn" type="submit">Załóż konto</button>
