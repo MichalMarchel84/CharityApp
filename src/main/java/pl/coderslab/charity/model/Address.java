@@ -22,5 +22,6 @@ public class Address {
     private String city;
     @Pattern(regexp = "^[0-9]{2}-[0-9]{3}")
     private String postCode;
+    @Pattern(regexp = "^ *$|^\\+?[0-9 ]{9,}$")
     private String phone;
 }

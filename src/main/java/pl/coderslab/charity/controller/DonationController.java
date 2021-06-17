@@ -5,13 +5,19 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charity.model.Donation;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 
-@Slf4j
+import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 @Controller
 public class DonationController {
 
@@ -33,9 +39,24 @@ public class DonationController {
     }
 
     @PostMapping("/donate")
-    public String doDonation(Donation donation){
-        log.error(">>>>>>>>>> Donation:");
-        log.error(donation.toString());
+    public String doDonation(@RequestParam String date, @Valid Donation donation, BindingResult result, Model model){
+
+        if(result.hasErrors()){
+            return "donation";
+        }else {
+            try{
+                donation.setPickUpDate(LocalDate.parse(date, DateTimeFormatter.ISO_DATE));
+            }catch (DateTimeParseException e){
+                model.addAttribute("dateErr", "Nieprawidłowy format daty");
+                return "donation";
+            }
+            if(donation.getPickUpDate().isBefore(LocalDate.now())){
+                model.addAttribute("dateErr", "Ten termin już minął");
+                return "donation";
+            }
+        }
+        System.out.println(">>>>>>>>Donation");
+        System.out.println(donation);
         return "redirect:/";
     }
 }
