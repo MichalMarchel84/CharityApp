@@ -46,8 +46,9 @@
     <div class="slogan container container--90">
         <div class="slogan--item">
             <h1>
-                Zacznij pomagać!<br/>
-                Oddaj niechciane rzeczy w zaufane ręce
+                ${(empty pageMsg) ?
+                "Zacznij pomagać!<br/> Oddaj niechciane rzeczy w zaufane ręce"
+                : pageMsg}
             </h1>
         </div>
     </div>

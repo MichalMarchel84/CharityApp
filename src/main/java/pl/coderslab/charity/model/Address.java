@@ -1,5 +1,7 @@
 package pl.coderslab.charity.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,12 +18,22 @@ public class Address {
     private Long id;
     @ManyToOne
     private User user;
-    @NotBlank
+    @NotBlank(message = "Nie podano ulicy")
     private String street;
-    @NotBlank
+    @NotBlank(message = "Nie podano miasta")
     private String city;
-    @Pattern(regexp = "^[0-9]{2}-[0-9]{3}")
+    @Pattern(regexp = "^[0-9]{2}-[0-9]{3}", message = "Niepoprawny kod pocztowy")
     private String postCode;
-    @Pattern(regexp = "^ *$|^\\+?[0-9 ]{9,}$")
+    @Pattern(regexp = "^ *$|^\\+?[0-9 ]{9,}$", message = "Niepoprawny numer telefonu")
     private String phone;
+
+    @Override
+    public String toString(){
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
+    }
 }

@@ -124,6 +124,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 label.removeChild(hidden);
                 label.appendChild(hidden);
             });
+
+            const adr = document.querySelector("#adr");
+            if(adr) {
+                adr.addEventListener("change", evt => {
+                    const inputs = document.querySelectorAll("div[data-step='4'] input[type='text']");
+                    if (evt.target.value) {
+                        document.querySelector("#adrSave").style.display = "none";
+                        const vals = JSON.parse(evt.target.value);
+                        document.querySelector('#adrId').value = vals.id;
+                        inputs[0].value = vals.street;
+                        inputs[1].value = vals.city;
+                        inputs[2].value = vals.postCode;
+                        inputs[3].value = vals.phone;
+
+                    } else {
+                        document.querySelector("#adrSave").style.display = "flex";
+                        document.querySelector('#adrId').value = "";
+                        for (let i = 0; i < 4; i++) {
+                            inputs[i].value = "";
+                        }
+                    }
+                });
+            }
         }
 
         /**
@@ -191,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return false;
                 case 4:
                     result = true;
-                    const inputs = document.querySelectorAll("div[data-step='4'] input");
+                    const inputs = document.querySelectorAll("div[data-step='4'] input[type='text'], div[data-step='4'] input[type='date'], div[data-step='4'] input[type='time']");
                     const errMsgs = document.querySelectorAll("div[data-step='4'] p.errMsg");
                     if(inputs[0].value.replaceAll(" ", "") === ""){
                         errMsgs[0].innerText = "Pole nie może być puste";
@@ -211,17 +234,22 @@ document.addEventListener("DOMContentLoaded", function () {
                         errMsgs[3].innerText = "Nieprawidłowy numer telefonu";
                         result = false;
                     }else errMsgs[3].innerText = "";
-                    const dateForm = new Date(inputs[4].value);
-                    const dateNow = new Date(Date.now());
-                    if(!(dateForm > dateNow)){
-                        errMsgs[4].innerText = "Nie możesz zamówić kuriera wcześniej niż na jutro";
+                    regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    if(!regex.test(inputs[4].value)){
+                        errMsgs[4].innerText = "Nieprawidłowy email";
                         result = false;
                     }else errMsgs[4].innerText = "";
-                    const formHour = inputs[5].value.split(":")[0];
-                    if((formHour < 8) || (formHour >= 20)){
-                        errMsgs[5].innerText = "Kurier odbiera przesyłki od 8 do 20";
+                    const dateForm = new Date(inputs[5].value);
+                    const dateNow = new Date(Date.now());
+                    if(!(dateForm > dateNow)){
+                        errMsgs[5].innerText = "Nie możesz zamówić kuriera wcześniej niż na jutro";
                         result = false;
                     }else errMsgs[5].innerText = "";
+                    const formHour = inputs[6].value.split(":")[0];
+                    if((formHour < 8) || (formHour >= 20)){
+                        errMsgs[6].innerText = "Kurier odbiera przesyłki od 8 do 20";
+                        result = false;
+                    }else errMsgs[6].innerText = "";
                     return result;
             }
         }
@@ -277,14 +305,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 const adrSummary = [...lists[1].querySelectorAll("li")];
-                const adrForm = [...document.querySelectorAll("div[data-step='4'] input")];
+                const adrForm = [...document.querySelectorAll("div[data-step='4'] input[type='text'], div[data-step='4'] input[type='date'], div[data-step='4'] input[type='time']")];
                 for (let i = 0; i < adrSummary.length; i++){
                     adrSummary[i].innerText = adrForm[i].value;
                 }
 
                 const pickUpSummary = [...lists[2].querySelectorAll("li")];
-                pickUpSummary[0].innerText = adrForm[4].value;
-                pickUpSummary[1].innerText = adrForm[5].value;
+                pickUpSummary[0].innerText = adrForm[5].value;
+                pickUpSummary[1].innerText = adrForm[6].value;
                 const msg = document.querySelector("div[data-step='4'] textarea").value;
                 if(msg === "") pickUpSummary[2].innerText = "Brak uwag";
                 else pickUpSummary[2].innerText = msg;

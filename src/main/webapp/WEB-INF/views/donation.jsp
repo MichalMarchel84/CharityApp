@@ -132,7 +132,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <form:input path="quantity" type="number" min="1"/>
+                        <form:input path="quantity" type="number"/>
                     </label>
                 </div>
 
@@ -156,7 +156,7 @@
                             <span class="description">
                   <div class="title">${institution.name}</div>
                   <div class="subtitle">
-                    ${institution.description}
+                          ${institution.description}
                   </div>
                 </span>
                         </label>
@@ -175,8 +175,31 @@
                 <h3>Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
 
                 <div class="form-section form-section--columns">
+
                     <div class="form-section--column">
-                        <h4>Adres odbioru</h4>
+                        <h4>
+                            Adres odbioru
+                            <sec:authorize access="isAuthenticated()">
+
+                                <div class="form-group form-group--checkbox">
+                                    <select id="adr" style="width: 100%">
+                                        <option value="">Nowy adres</option>
+                                        <c:forEach items="${addresses}" var="adr">
+                                            <option value='${adr}'>${adr.street}</option>
+                                        </c:forEach>
+                                    </select><br/>
+                                    <input type="hidden" name="adrId" id="adrId">
+                                    <label id="adrSave">
+                                        <div style="display: flex; align-items: center; flex-direction: row-reverse">
+                                            Zapisz adres
+                                            <input name="saveAdr" type="checkbox">
+                                            <span class="checkbox" style="margin: 10px"></span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </sec:authorize>
+                        </h4>
+
                         <div class="form-group form-group--inline">
                             <label> Ulica
                                 <form:input path="address.street"/>
@@ -199,7 +222,14 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Numer telefonu
-                                <form:input path="address.phone" type="phone"/>
+                                <form:input path="address.phone"/>
+                            </label>
+                        </div>
+                        <p class="errMsg"></p>
+                        <div class="form-group form-group--inline">
+                            <label>
+                                Email
+                                <form:input path="email" value="${userEmail}"/>
                             </label>
                         </div>
                         <p class="errMsg"></p>
@@ -243,16 +273,12 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
-                                >
+                                <span class="summary--text"></span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
-                                >
+                                <span class="summary--text"></span>
                             </li>
                         </ul>
                     </div>
@@ -261,19 +287,20 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
                             </ul>
                         </div>
                     </div>
