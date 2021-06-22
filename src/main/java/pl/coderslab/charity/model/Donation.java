@@ -40,4 +40,6 @@ public class Donation {
     private String email;
     @ManyToOne
     private User user;
+    @ManyToOne
+    private Status status;
 }

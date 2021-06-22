@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charity.model.User;
+import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.UserService;
 
@@ -17,10 +18,12 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
 
+    private final InstitutionRepository institutionRepository;
     private final UserService users;
     private final DonationService donationService;
 
-    public HomeController(UserService users, DonationService donationService) {
+    public HomeController(InstitutionRepository institutionRepository, UserService users, DonationService donationService) {
+        this.institutionRepository = institutionRepository;
         this.users = users;
         this.donationService = donationService;
     }
@@ -29,6 +32,7 @@ public class HomeController {
     public String homeAction(Model model){
         model.addAttribute("bags", donationService.getTotalBags());
         model.addAttribute("donations", donationService.getTotalDonations());
+        model.addAttribute("institutions", institutionRepository.findAll());
         return "index";
     }
 

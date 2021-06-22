@@ -16,10 +16,9 @@
         <h2>Skontaktuj się z nami</h2>
         <h3>Formularz kontaktowy</h3>
         <form class="form--contact">
-            <div class="form-group form-group--50"><input type="text" name="name" placeholder="Imię"/></div>
-            <div class="form-group form-group--50"><input type="text" name="surname" placeholder="Nazwisko"/></div>
+            <div class="form-group"><input type="text" name="name" placeholder="Email" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}"/></div>
 
-            <div class="form-group"><textarea name="message" placeholder="Wiadomość" rows="1"></textarea></div>
+            <div class="form-group"><textarea name="message" placeholder="Wiadomość" rows="2"></textarea></div>
 
             <button class="btn" type="submit">Wyślij</button>
         </form>
@@ -32,6 +31,5 @@
         </div>
     </div>
 </footer>
-<%--<script src="<c:url value="/resources/js/app.js"/>"></script>--%>
 </body>
 </html>

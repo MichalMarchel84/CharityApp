@@ -69,7 +69,7 @@
     </sec:authorize>
 </section>
 
-<section class="about-us">
+<section class="about-us" id="about">
     <div class="about-us--text">
         <h2>O nas</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas vitae animi rem pariatur incidunt libero
@@ -80,7 +80,7 @@
     </div>
 </section>
 
-<section class="help">
+<section id="inst" class="help">
     <h2>Komu pomagamy?</h2>
 
     <!-- SLIDE 1 -->
@@ -89,30 +89,24 @@
             Możesz sprawdzić czym się zajmują.</p>
 
         <ul class="help--slides-items">
-            <li>
-                <div class="col">
-                    <div class="title">Fundacja "Dbam o Zdrowie"</div>
-                    <div class="subtitle">Cel i misja: Pomoc dzieciom z ubogich rodzin.</div>
-                </div>
+            <c:forEach begin="0" end="${institutions.size() - 1}" step="2" varStatus="i">
+                <li>
+                    <div class="col">
+                        <div class="title">${institutions.get(i.index).name}</div>
+                        <div class="subtitle">${institutions.get(i.index).description}</div>
+                    </div>
 
-                <div class="col">
-                    <div class="title">Fundacja "A kogo"</div>
-                    <div class="subtitle">Cel i misja: Pomoc wybudzaniu dzieci ze śpiączki.</div>
-                </div>
-            </li>
-
-            <li>
-                <div class="col">
-                    <div class="title">Fundacja “Dla dzieci"</div>
-                    <div class="subtitle">Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji życiowej.</div>
-                </div>
-                <div class="col">
-                    <div class="title">Fundacja “Bez domu”</div>
-                    <div class="subtitle">Cel i misja: Pomoc dla osób nie posiadających miejsca zamieszkania</div>
-                </div>
-
-            </li>
-
+                    <c:if test="${(i.index + 1) < institutions.size()}">
+                        <div class="col">
+                            <div class="title">${institutions.get(i.index + 1).name}</div>
+                            <div class="subtitle">${institutions.get(i.index + 1).description}</div>
+                        </div>
+                    </c:if>
+                    <c:if test="${(i.index + 1) eq institutions.size()}">
+                        <diw style="width: 100%"></diw>
+                    </c:if>
+                </li>
+            </c:forEach>
         </ul>
     </div>
 

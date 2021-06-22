@@ -16,7 +16,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Document</title>
+    <title>Przekaż</title>
     <link rel="stylesheet" href="/resources/css/style.css"/>
 </head>
 <body>
@@ -29,10 +29,10 @@
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
                 <li class="logged-user">
-                    Witaj <sec:authentication property="principal.username"/>
+                    <sec:authentication property="principal.username"/>
                     <ul class="dropdown">
-                        <li><a href="#">Profil</a></li>
-                        <li><a href="#">Moje zbiórki</a></li>
+                        <li><a href="/user#profile">Profil</a></li>
+                        <li><a href="/user#donations">Moje zbiórki</a></li>
                         <li>
                             <form action="<c:url value="/logout"/>" method="post">
                                 <input type="submit" value="Wyloguj" class="btn btn--small btn--without-border">
@@ -48,7 +48,7 @@
             <li><a href="/" class="btn btn--without-border active">Start</a></li>
             <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a href="#" class="btn btn--without-border">O nas</a></li>
-            <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
+            <li><a href="/#inst" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>

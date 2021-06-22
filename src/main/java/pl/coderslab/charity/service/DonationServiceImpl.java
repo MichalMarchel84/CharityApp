@@ -1,11 +1,13 @@
 package pl.coderslab.charity.service;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.model.Address;
 import pl.coderslab.charity.model.Donation;
 import pl.coderslab.charity.repository.AddressRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,5 +62,10 @@ public class DonationServiceImpl implements DonationService {
             donationRepository.save(donation);
         }
         return true;
+    }
+
+    @Override
+    public List<Donation> findByUserEmail(String email) {
+        return donationRepository.findByUserEmail(email, Sort.by("status.workflowLevel").and(Sort.by("pickUpDate").descending().and(Sort.by("pickUpTime").descending())));
     }
 }

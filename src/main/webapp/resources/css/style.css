@@ -1839,3 +1839,49 @@ footer .bottom-line--icons a img {
   color: green;
   font-size: 2rem;
 }
+
+.steps--item .icon--mail-change {
+  background-image: url("../images/mail-change.png");
+}
+
+.steps--item .icon--pass-change {
+  background-image: url("../images/pass-change.png");
+}
+
+.steps--item .icon--edit {
+  background-image: url("../images/edit.png");
+}
+
+.steps--item .icon--donate {
+  background-image: url("../images/donate.png");
+}
+
+.steps--item .icon--contact {
+  background-image: url("../images/contact.png");
+}
+
+.table-cont{
+  display: flex;
+  justify-content: space-around;
+}
+
+.table{
+  border-collapse: collapse;
+  font-size: 20px;
+}
+
+.table tr:nth-child(even){background-color: #f2f2f2;}
+
+.table th{
+  background-color: #f9c910;
+}
+
+.table td{
+  text-align: center;
+}
+
+.table ul{
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}

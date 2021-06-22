@@ -17,28 +17,30 @@
         <ul class="nav--actions">
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
+                <li><a href="/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
-                <li>
-                    <a href="#" class="btn btn--small btn--without-border">
-                        <sec:authentication property="principal.username"/>
-                    </a>
-                </li>
-                <li>
-                    <form action="<c:url value="/logout"/>" method="post">
-                        <input type="submit" value="Wyloguj" class="btn btn--small btn--without-border">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    </form>
+                <li class="logged-user">
+                    <sec:authentication property="principal.username"/>
+                    <ul class="dropdown">
+                        <li><a href="/user#profile">Profil</a></li>
+                        <li><a href="/user#donations">Moje zbiórki</a></li>
+                        <li>
+                            <form action="<c:url value="/logout"/>" method="post">
+                                <input type="submit" value="Wyloguj" class="btn btn--small btn--without-border">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </form>
+                        </li>
+                    </ul>
                 </li>
             </sec:authorize>
-            <li><a href="/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>
         </ul>
 
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>
             <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="#" class="btn btn--without-border">O nas</a></li>
-            <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
+            <li><a href="/#about" class="btn btn--without-border">O nas</a></li>
+            <li><a href="/#inst" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>

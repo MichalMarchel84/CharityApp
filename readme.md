@@ -1,12 +1,16 @@
-<img alt="Logo" src="http://coderslab.pl/svg/logo-coderslab.svg" width="400">
 
+## Oddam w dobre ręce
 
-Przed przystąpieniem do pracy  przeczytaj poniższe wskazówki.
-## Jak zacząć?
+Aplikacja promująca oddawanie niepotrzebnych przedmiotów na rzecz organizacji 
+harytatywnych.
 
-1. Zaimportuj projekt jako projekt `Maven`, wg poniższych wskazówek:
+Niezalogowanemu użytkownikowi pozwala przesłać formularz kontaktowy oraz
+formularz zgłoszenia darowizny.
 
-	* W `IntelliJ` wybieramy: `File –> New –> Project from Existing Sources...`
-	* Wskazujemy lokalizację katalogu ze sklonowanym projektem i zatwierdzamy.
-	* Następnie w nowym oknie wybieramy: `Import project from external model` i wskazujemy `Maven`
-	* Wybieramy kolejno opcje: `Next –> Next –> Next –> Finish`
+Po zalogowaniu użytkownik uzyskuje dodatkowo możliwość zapisywania, 
+edycji i autouzupełnienia danych adresowych oraz przeglądania i 
+sortowania listy swoich darowizn.
+
+Administrator może blokować/odblokowywać użytkowników, przeglądać listę
+wszystkich darowizn (według kryteriów wyszukiwania) oraz zmieniać
+statusy darowizn.
