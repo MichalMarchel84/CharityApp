@@ -1885,3 +1885,56 @@ footer .bottom-line--icons a img {
   margin: 0;
   padding: 10px;
 }
+
+.dialog-cont{
+  position: absolute;
+  top: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dialog-box{
+  top: -30vh;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 2px 2px 5px #3c3c3c;
+  border-radius: 10px;
+  width: 80em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dialog-box form{
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.dialog-box input[type="text"], .dialog-box input[type="password"]{
+  width: 30em;
+  height: 2em;
+  font-size: 20px;
+  text-align: center;
+  margin: 0.3em auto 1em;
+}
+
+.dialog-box label{
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  justify-content: space-around;
+}
+
+.address-cont{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5vh 5vw;
+}

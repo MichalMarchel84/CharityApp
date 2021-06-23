@@ -18,6 +18,9 @@
 </head>
 <body>
 <%@include file="../header.jsp"%>
+<div class="address-cont">
+
+</div>
 <%@include file="../footer.jsp"%>
 </body>
 </html>
