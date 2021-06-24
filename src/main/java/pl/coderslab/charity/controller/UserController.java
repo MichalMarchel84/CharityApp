@@ -40,7 +40,8 @@ public class UserController {
     }
 
     @GetMapping("/address")
-    public String editAddress(){
+    public String editAddress(@AuthenticationPrincipal UserDetails user, Model model){
+        model.addAttribute("addresses", userService.getUserAddresses(user.getUsername()));
         return "user/address";
     }
 

@@ -19,7 +19,9 @@
 <body>
 <%@include file="../header.jsp"%>
 <div class="address-cont">
+    <c:forEach items="${addresses}" var="address">
 
+    </c:forEach>
 </div>
 <%@include file="../footer.jsp"%>
 </body>

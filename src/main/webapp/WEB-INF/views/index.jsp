@@ -34,7 +34,7 @@
     </div>
 </section>
 
-<section class="steps">
+<section class="steps" id="info">
     <h2>Wystarczą 4 proste kroki</h2>
 
     <div class="steps--container">

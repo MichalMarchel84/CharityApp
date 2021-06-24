@@ -46,8 +46,8 @@
 
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>
-            <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="#" class="btn btn--without-border">O nas</a></li>
+            <li><a href="/#info" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a href="/#about" class="btn btn--without-border">O nas</a></li>
             <li><a href="/#inst" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
@@ -56,6 +56,7 @@
     <div class="slogan container container--90">
         <div class="slogan--item">
             <h1>
+                <p style="color: red">Uwaga! Strona wyłącznie w celach prezentacyjnych.<br/>Żadne z zamieszczonych treści nie są autentyczne</p>
                 Oddaj rzeczy, których już nie chcesz<br/>
                 <span class="uppercase">potrzebującym</span>
             </h1>
