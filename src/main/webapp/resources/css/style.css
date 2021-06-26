@@ -1860,6 +1860,11 @@ footer .bottom-line--icons a img {
   background-image: url("../images/contact.png");
 }
 
+.steps--item .icon--add {
+  background-image: url("../images/add.png");
+  margin-top: 30px;
+}
+
 .table-cont{
   display: flex;
   justify-content: space-around;
@@ -1935,6 +1940,49 @@ footer .bottom-line--icons a img {
 
 .address-cont{
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
   padding: 5vh 5vw;
+  width: 100%;
+}
+
+.address-cont > *{
+  width: max(18%, 250px);
+}
+
+.address{
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px #737373;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.address form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.address form > *{
+  margin: 10px 0;
+  width: 90%;
+  text-align: center;
+}
+
+.address form div{
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.add-address{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 50px 0;
 }

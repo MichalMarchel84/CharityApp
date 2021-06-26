@@ -24,7 +24,7 @@ public class Address {
     private String city;
     @Pattern(regexp = "^[0-9]{2}-[0-9]{3}", message = "Niepoprawny kod pocztowy")
     private String postCode;
-    @Pattern(regexp = "^ *$|^\\+?[0-9 ]{9,}$", message = "Niepoprawny numer telefonu")
+    @Pattern(regexp = "^ *$|^(\\+[0-9]{2})?[0-9 ]{9,}$", message = "Niepoprawny numer telefonu")
     private String phone;
 
     @Override

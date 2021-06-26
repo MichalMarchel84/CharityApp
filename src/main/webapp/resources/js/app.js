@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         errMsgs[2].innerText = "Nieprawidłowy kod pocztowy";
                         result = false;
                     }else errMsgs[2].innerText = "";
-                    regex = /^ *$|^\+?[0-9 ]{9,}$/;
+                    regex = /^ *$|^(\+[0-9]{2})?[0-9 ]{9,}$/;
                     if(!regex.test(inputs[3].value)){
                         errMsgs[3].innerText = "Nieprawidłowy numer telefonu";
                         result = false;

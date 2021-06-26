@@ -56,7 +56,7 @@
             <h3></h3>
             <p>Zmień hasło</p>
         </div>
-        <div class="steps--item btn btn--large" style="padding: 10px" onclick="location.href='/user/address'">
+        <div class="steps--item btn btn--large" style="padding: 10px" onclick="location.href='/user/address#address'">
             <span class="icon icon--edit"></span>
             <h3></h3>
             <p>Edytuj adresy</p>
