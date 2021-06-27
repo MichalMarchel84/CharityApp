@@ -25,6 +25,9 @@
                     <ul class="dropdown">
                         <li><a href="/user#profile">Profil</a></li>
                         <li><a href="/user#donations">Moje zbiórki</a></li>
+                        <sec:authorize access="hasAnyRole('ADMIN')">
+                            <li><a href="/admin">Zarządzanie</a></li>
+                        </sec:authorize>
                         <li>
                             <form action="<c:url value="/logout"/>" method="post">
                                 <input type="submit" value="Wyloguj" class="btn btn--small btn--without-border">

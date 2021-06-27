@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charity.model.Donation;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+import pl.coderslab.charity.repository.StatusRepository;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.UserService;
 
@@ -30,20 +31,22 @@ public class DonationController {
     private final UserService userService;
     private final DonationService donationService;
     private final Validator validator;
+    private final StatusRepository statusRepository;
 
-    public DonationController(CategoryRepository categoryRepository, InstitutionRepository institutionRepository, UserService userService, DonationService donationService, Validator validator) {
+    public DonationController(CategoryRepository categoryRepository, InstitutionRepository institutionRepository, UserService userService, DonationService donationService, Validator validator, StatusRepository statusRepository) {
         this.categoryRepository = categoryRepository;
         this.institutionRepository = institutionRepository;
         this.userService = userService;
         this.donationService = donationService;
         this.validator = validator;
+        this.statusRepository = statusRepository;
     }
 
     @GetMapping("/donate")
     public String donation(@AuthenticationPrincipal UserDetails user, Model model){
 
         model.addAttribute("categories", categoryRepository.findAll());
-        model.addAttribute("institutions", institutionRepository.findAll());
+        model.addAttribute("institutions", institutionRepository.findAllByDeletedIsNull());
         model.addAttribute("donation", new Donation());
         if(user != null) {
             model.addAttribute("userEmail", user.getUsername());
@@ -99,6 +102,7 @@ public class DonationController {
         boolean ok = true;
         if(user != null) {
             donation.setUser(userService.findByEmail(user.getUsername()));
+            donation.setStatus(statusRepository.findByWorkflowLevel(1).orElse(null));
             if (request.getParameter("saveAdr") != null) {
                 Long adrId = userService.saveAddress(user.getUsername(), donation.getAddress());
                 if(adrId != null) {

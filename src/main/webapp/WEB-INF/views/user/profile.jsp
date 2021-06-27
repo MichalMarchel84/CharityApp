@@ -88,7 +88,7 @@
                     <th style="width: 10vw">Data odbioru</th>
                     <th style="width: 20vw">Zawartość</th>
                     <th style="width: 5vw">Ilość worków</th>
-                    <th style="width: 25vw">Dla</th>
+                    <th style="width: 25vw">Instytucja</th>
                     <th style="width: 15vw">Status</th>
                 </tr>
                 </thead>

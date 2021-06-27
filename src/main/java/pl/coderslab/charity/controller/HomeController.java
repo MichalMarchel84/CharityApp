@@ -1,5 +1,8 @@
 package pl.coderslab.charity.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +16,8 @@ import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.UserService;
 
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.Collections;
 
 
 @Controller
@@ -32,8 +37,15 @@ public class HomeController {
     public String homeAction(Model model){
         model.addAttribute("bags", donationService.getTotalBags());
         model.addAttribute("donations", donationService.getTotalDonations());
-        model.addAttribute("institutions", institutionRepository.findAll());
+        model.addAttribute("institutions", institutionRepository.findAllByDeletedIsNull());
         return "index";
+    }
+
+    @GetMapping("/default")
+    public String redirectByRole(@AuthenticationPrincipal UserDetails user){
+        if(user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return "redirect:/admin";
+        else if(user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) return "redirect:/user";
+        return "redirect:/";
     }
 
     @GetMapping("/login")

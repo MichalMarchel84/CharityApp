@@ -11,4 +11,5 @@ public interface DonationService {
     void saveDonation(Donation donation);
     boolean saveDonation(Long addressId, Donation donation);
     List<Donation> findByUserEmail(String email);
+    List<Donation> findAll();
 }

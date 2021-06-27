@@ -68,4 +68,9 @@ public class DonationServiceImpl implements DonationService {
     public List<Donation> findByUserEmail(String email) {
         return donationRepository.findByUserEmail(email, Sort.by("status.workflowLevel").and(Sort.by("pickUpDate").descending().and(Sort.by("pickUpTime").descending())));
     }
+
+    @Override
+    public List<Donation> findAll() {
+        return donationRepository.findAll();
+    }
 }

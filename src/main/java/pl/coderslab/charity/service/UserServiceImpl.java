@@ -62,4 +62,9 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 }

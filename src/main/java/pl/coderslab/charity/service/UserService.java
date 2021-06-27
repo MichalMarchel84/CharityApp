@@ -11,4 +11,5 @@ public interface UserService {
     void updateUser(User user);
     List<Address> getUserAddresses(String userEmail);
     Long saveAddress(String userEmail, Address address);
+    List<User> findAll();
 }
