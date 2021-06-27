@@ -32,7 +32,7 @@
     <title>Oddam w dobre ręce</title>
 </head>
 <body>
-<%@include file="../header.jsp"%>
+<%@include file="../header.jsp" %>
 <section id="institutions" class="steps">
     <h2>Instytucje</h2>
     <div class="address-cont" data-pn="${_csrf.parameterName}" data-pt="${_csrf.token}">
@@ -41,7 +41,8 @@
                 <form method="post" action="/admin/institutions" id="id${institution.id}">
                     <input type="hidden" name="id" value="${institution.id}">
                     <input type="text" name="name" value="${fn:escapeXml(institution.name)}" placeholder="Nazwa">
-                    <textarea name="description" form="id${institution.id}" placeholder="Opis" rows="4"><c:out value="${institution.description}"/></textarea>
+                    <textarea name="description" form="id${institution.id}" placeholder="Opis" rows="4"><c:out
+                            value="${institution.description}"/></textarea>
                     <div>
                         <input type="submit" value="Zapisz" class="btn btn--small">
                         <button name="delete" class="btn btn--small">Usuń</button>
@@ -102,39 +103,49 @@
 </section>
 <section class="steps">
     <h2>Darowizny</h2>
-        <div class="table-cont">
-            <table id="donations" class="table">
-                <thead>
+    <div class="table-cont">
+        <table id="donations" class="table">
+            <thead>
+            <tr>
+                <th style="width: 10vw">Data odbioru</th>
+                <th style="width: 15vw">Zawartość</th>
+                <th style="width: 5vw">Ilość worków</th>
+                <th style="width: 20vw">Instytucja</th>
+                <th style="width: 10vw">Wiadomość</th>
+                <th style="width: 10vw">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${donations}" var="donation">
                 <tr>
-                    <th style="width: 10vw">Data odbioru</th>
-                    <th style="width: 15vw">Zawartość</th>
-                    <th style="width: 5vw">Ilość worków</th>
-                    <th style="width: 20vw">Instytucja</th>
-                    <th style="width: 10vw">Wiadomość</th>
-                    <th style="width: 10vw">Status</th>
+                    <td>${donation.pickUpDate.toString()} ${donation.pickUpTime.toString()}</td>
+                    <td>
+                        <ul>
+                            <c:forEach items="${donation.categories}" var="categoty">
+                                <li>${categoty.name}</li>
+                            </c:forEach>
+                        </ul>
+                    </td>
+                    <td>${donation.quantity}</td>
+                    <td>${donation.institution.name}</td>
+                    <td>${donation.pickUpComment}</td>
+                    <td>${donation.status.name}</td>
                 </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${donations}" var="donation">
-                    <tr>
-                        <td>${donation.pickUpDate.toString()} ${donation.pickUpTime.toString()}</td>
-                        <td>
-                            <ul>
-                                <c:forEach items="${donation.categories}" var="categoty">
-                                    <li>${categoty.name}</li>
-                                </c:forEach>
-                            </ul>
-                        </td>
-                        <td>${donation.quantity}</td>
-                        <td>${donation.institution.name}</td>
-                        <td>${donation.pickUpComment}</td>
-                        <td>${donation.status.name}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    <div class="dialog-cont" style="display: none; position: fixed; top: 0">
+        <div class="dialog-box">
+            <h2></h2>
+            <form method="post">
+                <input id="csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
+            <p class="errMsg"></p>
         </div>
+    </div>
 </section>
-<%@include file="../footer.jsp"%>
+
+<%@include file="../footer.jsp" %>
 </body>
 </html>

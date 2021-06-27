@@ -1931,6 +1931,13 @@ footer .bottom-line--icons a img {
   margin: 0.3em auto 1em;
 }
 
+.dialog-box select{
+  height: 2em;
+  font-size: 20px;
+  margin: 0.3em auto 1em;
+  padding: 0.2em;
+}
+
 .dialog-box label{
   display: flex;
   flex-direction: column;

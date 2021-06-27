@@ -15,7 +15,8 @@ public class CachedAuthFailHandler implements AuthenticationFailureHandler {
                                         AuthenticationException e) throws IOException, ServletException {
 
         request.setAttribute("email", request.getParameter("username"));
-        request.setAttribute("errMsg", "Email lub hasło nieprawidłowe");
+        if(e.getMessage().equals("disabled")) request.setAttribute("errMsg", "Konto zablokowane przez administratora");
+        else request.setAttribute("errMsg", "Email lub hasło nieprawidłowe");
         request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
     }
 }
