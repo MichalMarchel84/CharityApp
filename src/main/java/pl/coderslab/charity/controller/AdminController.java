@@ -102,11 +102,18 @@ public class AdminController {
 
             if (((Role) user.getRoles().toArray()[0]).getName().equals("ROLE_USER")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                return "Nie sam sobie odebrać uprawnień administratora...";
+                return "Nie możesz sam sobie odebrać uprawnień administratora...";
             }
         }
         user.setPassword(savedUser.get().getPassword());
         userService.updateUser(user);
+        return "";
+    }
+
+    @GetMapping("/user/delete")
+    @ResponseBody
+    public String deleteUser(@RequestParam String id, HttpServletResponse response){
+        if(!userService.deleteUser(id)) response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return "";
     }
 }

@@ -6,6 +6,7 @@ import pl.coderslab.charity.model.Address;
 import pl.coderslab.charity.model.Role;
 import pl.coderslab.charity.model.User;
 import pl.coderslab.charity.repository.AddressRepository;
+import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.RoleRepository;
 import pl.coderslab.charity.repository.UserRepository;
 
@@ -20,13 +21,15 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final AddressRepository addressRepository;
+    private final DonationRepository donationRepository;
 
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
-                           BCryptPasswordEncoder passwordEncoder, AddressRepository addressRepository) {
+                           BCryptPasswordEncoder passwordEncoder, AddressRepository addressRepository, DonationRepository donationRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.addressRepository = addressRepository;
+        this.donationRepository = donationRepository;
     }
 
     @Override
@@ -73,5 +76,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public boolean deleteUser(String userId) {
+        try{
+            Long id = Long.parseLong(userId);
+            addressRepository.unbindUser(id);
+            donationRepository.unbindUser(id);
+            userRepository.clearRoles(id);
+            userRepository.deleteById(id);
+        }catch (NumberFormatException e){
+            return false;
+        }
+        return true;
     }
 }

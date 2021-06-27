@@ -59,10 +59,11 @@ function displayUserDetails(ev) {
                     <option value="1">Administrator</option>
                     <option value="2">Użytkownik</option>
                 </select>
+                <button id="delete" class="btn" style="margin-left: 2em">Usuń</button>
             </div>
                 <div>
                     <input type="submit" value="Zapisz" class="btn btn--large">
-                    <button class="btn btn--large">Anuluj</button>
+                    <button id="cancel" class="btn btn--large">Anuluj</button>
                 </div>`;
     if(tr.children[1].innerText === "Aktywny"){
         form.querySelector("select[name='enabled']").children[0].selected = true;
@@ -75,7 +76,8 @@ function displayUserDetails(ev) {
         form.querySelector("select[name='roles']").children[1].selected = true;
     }
     form.append(csrf);
-    form.querySelector("button").addEventListener("click", hide);
+    form.querySelector("#delete").addEventListener("click", deleteUser);
+    form.querySelector("#cancel").addEventListener("click", hide);
     form.addEventListener("submit", sendUserChange);
     document.querySelector("div.dialog-cont").style.display = "flex";
 }
@@ -110,4 +112,21 @@ function sendUserChange(ev) {
 function hide(event) {
     event.preventDefault();
     document.querySelector("div.dialog-cont").style.display = "none";
+}
+
+function deleteUser(ev) {
+    ev.preventDefault();
+    if(confirm("Na pewno usunąć?")) {
+        const form = ev.target.closest("form");
+        const id = form.querySelector("input[name='id']").value;
+        fetch(`/admin/user/delete?id=${id}`,
+            {}
+        ).then(resp => {
+            if (resp.ok) {
+                document.querySelector("div.dialog-cont").style.display = "none";
+                document.querySelector(`#users tr[data-id='${id}']`).remove();
+            }
+            else document.querySelector("div.dialog-box p").innerText = "Nie udało się usunąć użytkownika";
+        });
+    }
 }

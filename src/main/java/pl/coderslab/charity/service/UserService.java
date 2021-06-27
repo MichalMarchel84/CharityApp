@@ -14,4 +14,5 @@ public interface UserService {
     List<Address> getUserAddresses(String userEmail);
     Long saveAddress(String userEmail, Address address);
     List<User> findAll();
+    boolean deleteUser(String userId);
 }
