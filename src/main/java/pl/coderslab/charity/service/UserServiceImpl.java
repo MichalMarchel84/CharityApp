@@ -82,10 +82,10 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(String userId) {
         try{
             Long id = Long.parseLong(userId);
-            addressRepository.unbindUser(id);
-            donationRepository.unbindUser(id);
-            userRepository.clearRoles(id);
-            userRepository.deleteById(id);
+            var user = userRepository.findById(id);
+            if(user.isEmpty()) return false;
+            else if(user.get().getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"))) return false;
+            userRepository.removeUser(id);
         }catch (NumberFormatException e){
             return false;
         }

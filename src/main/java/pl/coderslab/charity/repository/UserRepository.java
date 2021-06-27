@@ -9,10 +9,16 @@ import pl.coderslab.charity.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
     User findByEmail(String username);
 
     @Modifying
     @Transactional
-    @Query(value = "delete from users_roles where user_id = ?1", nativeQuery = true)
-    void clearRoles(Long id);
+    @Query(value =
+            "update addresses set user_id = null where user_id = ?1 ; " +
+            "update donations set user_id = null where user_id = ?1 ; " +
+            "delete from users_roles where user_id = ?1 ; " +
+            "delete from users where id = ?1 ;",
+            nativeQuery = true)
+    void removeUser(Long id);
 }
