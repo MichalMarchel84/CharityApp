@@ -23,15 +23,14 @@
     <h2>Zaloguj się</h2>
     <p class="newAccMsg">${newAccount}</p>
     <form method="post" action="/login">
-        <div class="form-group">
-            <input type="email" name="username" value="${fn:escapeXml(email)}" placeholder="Email"/>
+        <div class="form-group" style="display: flex; flex-direction: column; align-items: center">
+            <p style="font-size: 20px; text-align: center">Administrator: admin@admin.pl<br/>Hasło: admin1</p>
+            <input type="email" name="username" value="${fn:escapeXml(email)}" placeholder="Email" style="max-width: 300px; text-align: center"/>
         </div>
-        <div class="form-group">
-            <input type="password" name="password" placeholder="Hasło"/>
+        <div class="form-group" style="display: flex; flex-direction: column; align-items: center">
+            <input type="password" name="password" placeholder="Hasło" style="max-width: 300px; text-align: center"/>
             <p class="errMsg">${errMsg}</p>
-            <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
-
         <div class="form-group form-group--buttons">
             <a href="/register" class="btn btn--without-border">Załóż konto</a>
             <button class="btn" type="submit">Zaloguj się</button>

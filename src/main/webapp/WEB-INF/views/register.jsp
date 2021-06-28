@@ -23,19 +23,19 @@
     <h2>Załóż konto</h2>
 
     <form:form modelAttribute="user">
-        <div class="form-group">
-            <form:input path="email" type="email" placeholder="Email" /><br/>
+        <div class="form-group" style="display: flex; flex-direction: column; align-items: center">
+            <form:input path="email" type="email" placeholder="Email" cssStyle="max-width: 300px; text-align: center"/><br/>
             <span class="errMsg">${emailError}</span>
             <form:errors path="email" cssClass="errMsg"/>
         </div>
 
-        <div class="form-group">
-            <form:password path="password" placeholder="Hasło" /><br/>
+        <div class="form-group" style="display: flex; flex-direction: column; align-items: center">
+            <form:password path="password" placeholder="Hasło" cssStyle="max-width: 300px; text-align: center"/><br/>
             <form:errors path="password" cssClass="errMsg"/>
         </div>
 
-        <div class="form-group">
-            <input type="password" name="repeat" placeholder="Powtórz hasło" /><br/>
+        <div class="form-group" style="display: flex; flex-direction: column; align-items: center">
+            <input type="password" name="repeat" placeholder="Powtórz hasło" style="max-width: 300px; text-align: center"/><br/>
             <span class="errMsg">${repeatError}</span>
         </div>
 
