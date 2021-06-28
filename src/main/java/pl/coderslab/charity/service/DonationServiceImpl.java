@@ -73,4 +73,19 @@ public class DonationServiceImpl implements DonationService {
     public List<Donation> findAll() {
         return donationRepository.findAll();
     }
+
+    @Override
+    public Optional<Donation> findById(Long id) {
+        return donationRepository.findById(id);
+    }
+
+    @Override
+    public void updateDonation(Donation donation) {
+        donationRepository.save(donation);
+    }
+
+    @Override
+    public void deleteDonation(Long id) {
+        donationRepository.deleteById(id);
+    }
 }

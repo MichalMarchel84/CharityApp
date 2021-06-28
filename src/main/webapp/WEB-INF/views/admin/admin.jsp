@@ -27,6 +27,11 @@
                     url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Polish.json'
                 }
             });
+            $('#donations').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Polish.json'
+                }
+            });
         });
     </script>
     <title>Oddam w dobre ręce</title>
@@ -74,7 +79,7 @@
             <tbody>
             <c:forEach items="${users}" var="user">
                 <tr data-id="${user.id}">
-                    <td>${user.email}</td>
+                    <td>${fn:escapeXml(user.email)}</td>
                     <td>
                         <c:choose>
                             <c:when test="${user.enabled == 1}">
@@ -104,31 +109,43 @@
 <section class="steps">
     <h2>Darowizny</h2>
     <div class="table-cont">
-        <table id="donations" class="table">
+        <table id="donations" class="table" style="font-size: 15px">
             <thead>
             <tr>
-                <th style="width: 10vw">Data odbioru</th>
-                <th style="width: 15vw">Zawartość</th>
-                <th style="width: 5vw">Ilość worków</th>
-                <th style="width: 20vw">Instytucja</th>
+                <th style="width: 8vw">Data odbioru</th>
+                <th style="width: 12vw">Zawartość</th>
+                <th style="width: 4vw">Ilość</th>
+                <th style="width: 15vw">Instytucja</th>
+                <th style="width: 15vw">Adres</th>
+                <th style="width: 10vw">Kontakt</th>
                 <th style="width: 10vw">Wiadomość</th>
                 <th style="width: 10vw">Status</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${donations}" var="donation">
-                <tr>
+                <tr data-id="${donation.id}">
                     <td>${donation.pickUpDate.toString()} ${donation.pickUpTime.toString()}</td>
                     <td>
                         <ul>
                             <c:forEach items="${donation.categories}" var="categoty">
-                                <li>${categoty.name}</li>
+                                <li>${fn:escapeXml(categoty.name)}</li>
                             </c:forEach>
                         </ul>
                     </td>
                     <td>${donation.quantity}</td>
-                    <td>${donation.institution.name}</td>
-                    <td>${donation.pickUpComment}</td>
+                    <td>${fn:escapeXml(donation.institution.name)}</td>
+                    <td>
+                        ${fn:escapeXml(donation.address.street)}<br/>
+                        ${donation.address.postCode} ${fn:escapeXml(donation.address.city)}
+                    </td>
+                    <td>
+                        ${fn:escapeXml(donation.email)}
+                        <c:if test="${!empty donation.address.phone}">
+                            <br/>${donation.address.phone}
+                        </c:if>
+                    </td>
+                    <td>${fn:escapeXml(donation.pickUpComment)}</td>
                     <td>${donation.status.name}</td>
                 </tr>
             </c:forEach>

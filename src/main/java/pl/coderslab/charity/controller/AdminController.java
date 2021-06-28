@@ -11,14 +11,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.model.Institution;
 import pl.coderslab.charity.model.Role;
+import pl.coderslab.charity.model.Status;
 import pl.coderslab.charity.model.User;
 import pl.coderslab.charity.repository.InstitutionRepository;
+import pl.coderslab.charity.repository.StatusRepository;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -29,11 +31,13 @@ public class AdminController {
     private final InstitutionRepository institutionRepository;
     private final UserService userService;
     private final DonationService donationService;
+    private final StatusRepository statusRepository;
 
-    public AdminController(InstitutionRepository institutionRepository, UserService userService, DonationService donationService) {
+    public AdminController(InstitutionRepository institutionRepository, UserService userService, DonationService donationService, StatusRepository statusRepository) {
         this.institutionRepository = institutionRepository;
         this.userService = userService;
         this.donationService = donationService;
+        this.statusRepository = statusRepository;
     }
 
     @GetMapping
@@ -56,10 +60,12 @@ public class AdminController {
         try {
             var inst = institutionRepository.findById(Long.parseLong(id));
             if (inst.isPresent()) {
-                Institution institution = inst.get();
-                institution.setDeleted(true);
-                institutionRepository.save(institution);
-                return "";
+                if(institutionRepository.countByDeletedIsNull() > 1) {
+                    Institution institution = inst.get();
+                    institution.setDeleted(true);
+                    institutionRepository.save(institution);
+                    return "";
+                }
             }
         } catch (NumberFormatException e) {
             log.error("On parsing institution id: {}", id);
@@ -114,6 +120,38 @@ public class AdminController {
     @ResponseBody
     public String deleteUser(@RequestParam String id, HttpServletResponse response){
         if(!userService.deleteUser(id)) response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        return "";
+    }
+
+    @GetMapping("/status")
+    @ResponseBody
+    public List<Status> getStatuses(){
+        return statusRepository.findAll();
+    }
+
+    @PostMapping("/donation")
+    @ResponseBody
+    public String editDonation(@RequestParam Long id, @RequestParam Integer status, HttpServletResponse response){
+        var dopt = donationService.findById(id);
+        if(dopt.isEmpty()){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "Nie znaleziono tej darowizny";
+        }
+        var donation = dopt.get();
+        var sopt = statusRepository.findById(status);
+        if(sopt.isEmpty()){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "Nieznany status";
+        }
+        donation.setStatus(sopt.get());
+        donationService.updateDonation(donation);
+        return "";
+    }
+
+    @GetMapping("/donation/delete")
+    @ResponseBody
+    public String deleteDonation(@RequestParam Long id){
+        donationService.deleteDonation(id);
         return "";
     }
 }

@@ -10,4 +10,6 @@ import java.util.List;
 public interface InstitutionRepository extends JpaRepository<Institution, Long> {
 
     List<Institution> findAllByDeletedIsNull();
+
+    int countByDeletedIsNull();
 }

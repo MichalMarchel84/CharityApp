@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html lang="pl">
 <head>
@@ -26,8 +27,8 @@
             <div class="address">
                 <form method="post" action="/user/address">
                     <input type="hidden" name="id" value="${address.id}">
-                    <input type="text" name="street" value="${address.street}" placeholder="Ulica">
-                    <input type="text" name="city" value="${address.city}" placeholder="Miasto">
+                    <input type="text" name="street" value="${fn:escapeXml(address.street)}" placeholder="Ulica">
+                    <input type="text" name="city" value="${fn:escapeXml(address.city)}" placeholder="Miasto">
                     <input type="text" name="postCode" value="${address.postCode}" placeholder="Kod pocztowy">
                     <input type="text" name="phone" value="${address.phone}" placeholder="Telefon">
                     <div>

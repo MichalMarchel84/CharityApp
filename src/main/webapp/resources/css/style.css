@@ -1994,7 +1994,7 @@ footer .bottom-line--icons a img {
   padding: 50px 0;
 }
 
-#users tr:hover{
+#users tr:hover, #donations tr:hover{
   background-color: #f9c91050;
   cursor: pointer;
 }

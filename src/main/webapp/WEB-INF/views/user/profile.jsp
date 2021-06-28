@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html lang="pl">
 <head>
@@ -104,7 +105,7 @@
                             </ul>
                         </td>
                         <td>${donation.quantity}</td>
-                        <td>${donation.institution.name}</td>
+                        <td>${fn:escapeXml(donation.institution.name)}</td>
                         <td>${donation.status.name}</td>
                     </tr>
                 </c:forEach>
