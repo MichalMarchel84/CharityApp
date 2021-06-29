@@ -17,6 +17,7 @@ function displayEmailChange() {
     form.querySelector("input[type='text']").value = document.querySelector("li.logged-user").innerText;
     form.querySelector("button").addEventListener("click", hide);
     form.addEventListener("submit", ev => sendChange(ev, true));
+    document.querySelector("div.dialog-box p").innerText = "";
     document.querySelector("div.dialog-cont").style.display = "flex";
 }
 
@@ -41,6 +42,7 @@ function displayPassChange() {
     form.append(csrf);
     form.querySelector("button").addEventListener("click", hide);
     form.addEventListener("submit", sendChange);
+    document.querySelector("div.dialog-box p").innerText = "";
     document.querySelector("div.dialog-cont").style.display = "flex";
 }
 
@@ -61,7 +63,6 @@ function sendChange(ev, changeName) {
             const msg = document.querySelector("div.dialog-box p");
             resp.text().then(txt => {
                 msg.innerText = txt;
-                document.querySelector("div.dialog-box").append(msg);
             });
         }
     });

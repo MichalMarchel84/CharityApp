@@ -15,12 +15,13 @@
     <div class="contact" id="contact">
         <h2>Skontaktuj się z nami</h2>
         <h3>Formularz kontaktowy</h3>
-        <form class="form--contact">
-            <div class="form-group"><input type="text" name="name" placeholder="Email" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}"/></div>
+        <form class="form--contact" method="post" action="/message">
+            <div class="form-group"><input type="text" name="email" placeholder="Email" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}"/></div>
 
             <div class="form-group"><textarea name="message" placeholder="Wiadomość" rows="2"></textarea></div>
 
             <button class="btn" type="submit">Wyślij</button>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
     </div>
     <div class="bottom-line">

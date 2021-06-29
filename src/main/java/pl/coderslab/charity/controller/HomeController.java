@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charity.model.User;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.service.DonationService;
+import pl.coderslab.charity.service.EmailService;
 import pl.coderslab.charity.service.UserService;
 
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Collections;
 
 
 @Controller
@@ -26,11 +25,13 @@ public class HomeController {
     private final InstitutionRepository institutionRepository;
     private final UserService users;
     private final DonationService donationService;
+    private final EmailService emailService;
 
-    public HomeController(InstitutionRepository institutionRepository, UserService users, DonationService donationService) {
+    public HomeController(InstitutionRepository institutionRepository, UserService users, DonationService donationService, EmailService emailService) {
         this.institutionRepository = institutionRepository;
         this.users = users;
         this.donationService = donationService;
+        this.emailService = emailService;
     }
 
     @RequestMapping("/")
@@ -75,4 +76,15 @@ public class HomeController {
         return "login";
     }
 
+    @PostMapping("/message")
+    public String sendMail(@RequestParam String email, @RequestParam String message, Model model){
+        try{
+            emailService.sendSimpleMessage(email, message);
+            model.addAttribute("pageMsg", "Wiadomość została wysłana.<br/>Dziękujemy za skorzystanie z formularza kontaktowego");
+        }catch (Exception e){
+            e.printStackTrace();
+            model.addAttribute("pageMsg", "Nie udało się wysłać wiadomości...");
+        }
+        return "blank";
+    }
 }

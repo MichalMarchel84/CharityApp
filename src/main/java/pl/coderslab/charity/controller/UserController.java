@@ -95,6 +95,10 @@ public class UserController {
     public String changeEmail(@AuthenticationPrincipal UserDetails ud,
                               @RequestParam String email,
                               HttpServletResponse response) {
+        if(ud.getUsername().equals("admin@admin.pl")){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "Nie możesz modyfikować tego użytkownika";
+        }
         User test = userService.findByEmail(email);
         if (test != null) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -121,6 +125,10 @@ public class UserController {
                              @RequestParam String repeat,
                              HttpServletResponse response) {
 
+        if(ud.getUsername().equals("admin@admin.pl")){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "Nie możesz modyfikować tego użytkownika";
+        }
         if (pass.equals(repeat)) {
             User user = userService.findByEmail(ud.getUsername());
             user.setPassword(pass);
