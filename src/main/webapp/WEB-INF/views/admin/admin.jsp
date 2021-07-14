@@ -152,7 +152,7 @@
             </tbody>
         </table>
     </div>
-    <div class="dialog-cont" style="display: none; position: fixed; top: 0">
+    <div class="dialog-cont" style="display: none; position: fixed; top: 0; z-index: 100">
         <div class="dialog-box">
             <h2></h2>
             <form method="post">
